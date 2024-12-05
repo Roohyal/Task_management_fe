@@ -1,36 +1,21 @@
 // components/Navbar.tsx
 import React from "react";
 import { Link } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="navbar">
-      <div className="navbar-header">
-        <span>Menu</span>
-        <i className="fas fa-times close-icon"></i>
-      </div>
-      <ul className="nav-menu">
-      <li>
-          <Link to ="/dashboard" className="hover:underline text-black-100">
-            Dashboard
-          </Link>
-        </li>
-        <li>
-          <Link to="/profile" > Profile</Link>
-        </li>
-        <li>
-          <Link to="/add-task" className="hover:underline text-black-100">
-            Add Tasks
-          </Link>
-        </li>
-        <li>
-          <Link to ="/all-task" className="hover:underline text-black-100 "> All Task</Link>
-        </li>
-        <li><Link to="/completed" className="hover:underline text-black-100">Completed Tasks</Link> </li>
-        
-        <li><a href="#">Logout</a></li>
-      </ul>
-    </div>
+    <div className="navbar flex justify-between items-center bg-blue-100 p-4 shadow-md">
+    {/* Welcome Message */}
+    <span className="text-xl font-semibold">
+      Welcome, <span className="text-blue-500"> Royal</span>
+    </span>
+
+    {/* Profile Icon */}
+    <Link to="/profile" className="text-2xl text-gray-700 hover:text-blue-500">
+      <i className="fas fa-user-circle"></i>
+    </Link>
+  </div>
   );
 };
 

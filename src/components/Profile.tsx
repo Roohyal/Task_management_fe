@@ -1,4 +1,5 @@
 import React from "react";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 interface ProfileProps {
   name: string;
@@ -22,20 +23,20 @@ const Profile: React.FC = () => {
             <div className="p-6">
               {/* FirstName */}
               <div className="flex items-center gap-4 mb-4">
-                <i className="fas fa-user text-blue-500 text-lg"></i>
-                <span className="text-gray-700 font-medium">name</span>
+                <i className="fas fa-user text-blue-500 text-lg "></i>
+                <span className="text-gray-700 font-medium">First name : </span>
               </div>
 
               {/* LastName */}
               <div className="flex items-center gap-4 mb-4">
                 <i className="fas fa-user text-blue-500 text-lg"></i>
-                <span className="text-gray-700 font-medium">lastname</span>
+                <span className="text-gray-700  text-center font-medium">Lastname : </span>
               </div>
     
               {/* Email */}
               <div className="flex items-center gap-4 mb-4">
                 <i className="fas fa-envelope text-blue-500 text-lg"></i>
-                <span className="text-gray-700 font-medium">email</span>
+                <span className="text-gray-700 font-medium">Email :</span>
               </div>
             </div>
     
