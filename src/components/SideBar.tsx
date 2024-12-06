@@ -14,9 +14,9 @@ const Sidebar: React.FC = () => {
       <div className="mt-10">
       <ul className="space-y-4">
         <li><Link to="/dashboard" className="hover:text-blue-400">Dashboard</Link></li>
-        <li><Link to="/add-task" className="hover:text-blue-400">Add Task</Link></li>
-        <li><Link to="/all-task" className="hover:text-blue-400">AllTasks</Link></li>
-        <li><Link to="/completed-task" className="hover:text-blue-400">Completed Tasks</Link></li>
+        <li><Link to="/dashboard/add-task" className="hover:text-blue-400">Add Task</Link></li>
+        <li><Link to="/dashboard/all-task" className="hover:text-blue-400">All Tasks</Link></li>
+        <li><Link to="/dashboard/completed-task" className="hover:text-blue-400">Completed Tasks</Link></li>
         <li><Link to="/logout" className="hover:text-blue-400">Logout</Link></li>
       </ul>
       </div>

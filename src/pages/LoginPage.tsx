@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
 
@@ -109,9 +110,9 @@ const LoginPage: React.FC = () => {
                   <div className="text-center text-gray-500 mt-4">
                     <p>
                       Don't have an account?{" "}
-                      <a href="Register.html" className="text-blue-400 hover:underline">
+                      <Link to="/register" className="text-blue-400 hover:underline">
                         Register
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </form>

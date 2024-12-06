@@ -1,5 +1,6 @@
 import React from 'react'
 import banImage from '../assets/ban-1.png';
+import { Link } from 'react-router-dom';
 
 const LandingPage: React.FC = () => {
 
@@ -9,7 +10,7 @@ const LandingPage: React.FC = () => {
       <header className="bg-gray-100 fixed top-0 w-full z-10 pt-4 ">
         <div className="container mx-auto px-6">
           <nav className="flex items-center justify-between py-4">
-            <a href="/" className="text-3xl font-bold text-gray-900">
+            <a href="#" className="text-3xl font-bold text-gray-900">
               Task<span className="text-blue-500">I</span>T
             </a>
             <button className="md:hidden text-2xl">
@@ -17,12 +18,12 @@ const LandingPage: React.FC = () => {
             </button>
             <ul className="hidden md:flex space-x-6">
                <li>
-                <a
-                  href="./auth/login.html"
+                <Link
+                  to="/register"
                   className=" font-bold text-gray-700 hover:text-blue-500"
                 >
                   Sign Up
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -44,12 +45,12 @@ const LandingPage: React.FC = () => {
               Stay organized, prioritize your tasks,<br/> and boost your
               productivity with our <br/>powerful task management app.
             </p>
-            <a
-              href="/auth/Register.html"
+            <Link
+              to="/register"
               className="mt-6 inline-block bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
             >
               Get Started
-            </a>
+            </Link>
           </div>
 
           {/* Image */}
