@@ -13,13 +13,21 @@ const CompletedTask: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
+    const token = localStorage.getItem("token");
   
     useEffect(() => {
       const fetchTasks = async () => {
         try {
           // Replace with your actual API endpoint
-          const response = await fetch('https://your-api-endpoint.com/tasks');
-          
+          const response = await fetch(
+            "http://localhost:8080/api/task/get-completed-tasks",
+            {
+              method: "GET", // Specify the GET method
+              headers: {
+                Authorization: `Bearer ${token}`, // Add the token here
+              },
+            }
+          );
           // Handle errors
           if (!response.ok) {
             throw new Error('Failed to fetch tasks');

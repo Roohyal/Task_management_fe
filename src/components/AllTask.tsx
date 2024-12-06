@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 interface Task {
-  title: string;
-  description: string;
+  taskName: string;
+  taskDescription: string;
   deadline: string;
   priority: "LOW" | "MEDIUM" | "HIGH";
-  status: "PENDING" | "IN_PROGRESS" | "COMPLETED";
+  taskStatus: "PENDING" | "IN_PROGRESS" | "COMPLETED";
 }
 
 const AllTask: React.FC = () => {
@@ -18,11 +18,21 @@ const AllTask: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [priorityFilter, setPriorityFilter] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("https://your-api-endpoint.com/tasks");
+        // Replace with your actual API endpoint
+        const response = await fetch(
+          "http://localhost:8080/api/task/get-current-user-tasks",
+          {
+            method: "GET", // Specify the GET method
+            headers: {
+              Authorization: `Bearer ${token}`, // Add the token here
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch tasks");
@@ -47,16 +57,20 @@ const AllTask: React.FC = () => {
 
     if (searchQuery) {
       updatedTasks = updatedTasks.filter((task) =>
-        task.title.toLowerCase().includes(searchQuery.toLowerCase())
+        task.taskName.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
     if (priorityFilter) {
-      updatedTasks = updatedTasks.filter((task) => task.priority === priorityFilter);
+      updatedTasks = updatedTasks.filter(
+        (task) => task.priority === priorityFilter
+      );
     }
 
     if (statusFilter) {
-      updatedTasks = updatedTasks.filter((task) => task.status === statusFilter);
+      updatedTasks = updatedTasks.filter(
+        (task) => task.taskStatus === statusFilter
+      );
     }
 
     setFilteredTasks(updatedTasks);
@@ -113,32 +127,61 @@ const AllTask: React.FC = () => {
           <table className="table-auto w-full border-collapse border border-gray-300 bg-white rounded-md">
             <thead className="bg-blue-200">
               <tr>
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">Title</th>
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">Description</th>
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">Deadline</th>
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">Priority</th>
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">Status</th>
-                <th className="px-4 py-2 border border-gray-300 text-center text-gray-700">Action</th>
+                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">
+                  Title
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">
+                  Description
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">
+                  Deadline
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">
+                  Priority
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-left text-gray-700">
+                  Status
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-center text-gray-700">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
               {filteredTasks.length > 0 ? (
                 filteredTasks.map((task, index) => (
                   <tr key={index} className="hover:bg-blue-50">
-                    <td className="px-4 py-2 border border-gray-300">{task.title}</td>
-                    <td className="px-4 py-2 border border-gray-300">{task.description}</td>
-                    <td className="px-4 py-2 border border-gray-300">{task.deadline}</td>
-                    <td className="px-4 py-2 border border-gray-300 text-red-500 font-bold">{task.priority}</td>
-                    <td className="px-4 py-2 border border-gray-300 text-green-600 font-semibold">{task.status}</td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {task.taskName}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {task.taskDescription}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {task.deadline}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300 text-red-500 font-bold">
+                      {task.priority}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300 text-green-600 font-semibold">
+                      {task.taskStatus}
+                    </td>
                     <td className="px-4 py-2 border border-gray-300 text-center">
-                      <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">Edit</button>
-                      <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+                      <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">
+                        Edit
+                      </button>
+                      <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} className="px-4 py-4 text-center text-gray-500">
+                  <td
+                    colSpan={6}
+                    className="px-4 py-4 text-center text-gray-500"
+                  >
                     No tasks found
                   </td>
                 </tr>

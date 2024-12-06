@@ -59,7 +59,7 @@ const Sidebar: React.FC = () => {
           </li>
           <li>
             <Link
-              to="/logout"
+              to="/"
               className={`block px-4 py-2 rounded ${
                 isActive("/logout") ? "bg-blue-500 text-white" : "hover:text-blue-400"
               }`}
