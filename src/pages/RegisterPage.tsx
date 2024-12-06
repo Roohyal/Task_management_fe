@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import task from '../assets/undraw_completed_tasks_vs6q.svg';
+import { Link } from "react-router-dom";
 
 
 
@@ -127,12 +128,12 @@ const RegisterPage : React.FC = () => {
               <div className="text-center text-gray-500 mt-3">
                 <p>
                   Already have an account?{" "}
-                  <a
-                    href="login.html"
+                  <Link
+                    to="/login"
                     className="text-blue-400  hover:underline"
                   >
                     Sign In
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>

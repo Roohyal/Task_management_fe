@@ -4,18 +4,22 @@ import React, { useState } from 'react';
 type Priority = 'LOW' | 'MEDIUM' | 'HIGH';
 type Status = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED';
 
-interface TaskFormData {
-  title: string;
-  description: string;
-  deadline: string;
-  priority: Priority;
-  status: Status;
-}
+// interface TaskFormData {
+//   title: string;
+//   description: string;
+//   deadline: string;
+//   priority: Priority;
+//   status: Status;
+// }
 const EditTask: React.FC =() =>{
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+   const [formData, setFormData] = useState<any>("");
+   const [loading, setLoading] = useState<any>("");
+  
+
+    const handleInputChange = (e: any) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
+        setFormData((prevData: any) => ({
           ...prevData,
           [name]: value,
         }));
@@ -26,7 +30,7 @@ const EditTask: React.FC =() =>{
         setLoading(true);
         // Simulate task update process
         setTimeout(() => {
-          onSubmit(formData);
+          //onSubmit(formData);
           setLoading(false);
         }, 2000);
       };

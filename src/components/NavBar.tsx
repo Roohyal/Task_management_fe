@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
     </span>
 
     {/* Profile Icon */}
-    <Link to="/profile" className="text-2xl text-gray-700 hover:text-blue-500">
+    <Link to="/dashboard/profile" className="text-2xl text-gray-700 hover:text-blue-500">
       <i className="fas fa-user-circle"></i>
     </Link>
   </div>
