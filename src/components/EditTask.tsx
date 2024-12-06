@@ -1,39 +1,106 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 type Priority = 'LOW' | 'MEDIUM' | 'HIGH';
 type Status = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED';
 
-// interface TaskFormData {
-//   title: string;
-//   description: string;
-//   deadline: string;
-//   priority: Priority;
-//   status: Status;
-// }
+interface TaskFormData {
+  taskName: string;
+  taskDescription: string;
+  deadline: string;
+  priority: Priority;
+  status: Status;
+}
+
 const EditTask: React.FC =() =>{
+  const { taskId } = useParams<{ taskId: string }>(); // Get task ID from URL
+  const [formData, setFormData] = useState<TaskFormData>({
+    taskName: "",
+    taskDescription: "",
+    deadline: "",
+    priority: "LOW",
+    status: "PENDING",
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+  const token = localStorage.getItem("token");
 
-   const [formData, setFormData] = useState<any>("");
-   const [loading, setLoading] = useState<any>("");
-  
+  // Fetch task details on component load
+  useEffect(() => {
+    const fetchTaskDetails = async () => {
+      if (!taskId) return;
+      try {
+        const response = await fetch(`http://localhost:8080/api/task/${taskId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-    const handleInputChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData((prevData: any) => ({
-          ...prevData,
-          [name]: value,
-        }));
-      };
+        if (response.ok) {
+          const task = await response.json();
+          setFormData({
+            taskName: task.taskName,
+            taskDescription: task.taskDescription,
+            deadline: task.deadline,
+            priority: task.priority,
+            status: task.status,
+          });
+        } else {
+          alert("Failed to fetch task details.");
+        }
+      } catch (error) {
+        console.error("Error fetching task:", error);
+      }
+    };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        // Simulate task update process
-        setTimeout(() => {
-          //onSubmit(formData);
-          setLoading(false);
-        }, 2000);
-      };
+    fetchTaskDetails();
+  }, [taskId, token]);
+
+  // Handle input changes
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Submit updated task
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/task/update-task?id=${taskId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        alert("Task updated successfully!");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message || "Failed to update task.");
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
     return(
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -46,7 +113,7 @@ const EditTask: React.FC =() =>{
                 type="text"
                 id="edit-title"
                 name="title"
-                value={formData.title}
+                value={formData.taskName}
                 onChange={handleInputChange}
                 required
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -58,7 +125,7 @@ const EditTask: React.FC =() =>{
               <textarea
                 id="edit-description"
                 name="description"
-                value={formData.description}
+                value={formData.taskDescription}
                 onChange={handleInputChange}
                 required
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

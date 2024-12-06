@@ -34,9 +34,9 @@ const RegisterPage : React.FC = () => {
       });
 
       if (response.ok) {
-        alert("User registered successfully!");
+        alert("User registered successfully!!, Kindly check your Email");
         // Redirect to confirmation page
-        window.location.href = "/confirmation/confirmation.html";
+        // window.location.href = "/confirmation/confirmation.html";
       } else {
         const errorData = await response.json();
         alert(errorData.message || "Failed to register user.");

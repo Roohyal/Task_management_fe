@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 interface Task {
+  id: number;
   taskName: string;
   taskDescription: string;
   deadline: string;
@@ -50,6 +51,30 @@ const AllTask: React.FC = () => {
 
     fetchTasks();
   }, []);
+  const deleteTask = async (id: number) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `http://localhost:8080/api/task/delete?id=${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete task");
+      }
+
+      // Update the tasks state to remove the deleted task
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
 
   // Handle filtering logic
   useEffect(() => {
@@ -170,7 +195,18 @@ const AllTask: React.FC = () => {
                       <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">
                         Edit
                       </button>
-                      <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+                      <button
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "Are you sure you want to delete this task?"
+                            )
+                          ) {
+                            deleteTask(task.id);
+                          }
+                        }}
+                        className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                      >
                         Delete
                       </button>
                     </td>
