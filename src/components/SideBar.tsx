@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   // Function to check if a route is active

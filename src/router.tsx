@@ -12,6 +12,7 @@ import TaskTable from "./components/TaskTable";
 import TaskOverview from "./components/TaskOverview";
 import CreateTask from "./components/CreateTask";
 import EditTask from "./components/EditTask";
+import EditDetails from "./components/EditDetails";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,11 @@ export const router = createBrowserRouter([
             path: "edit",
             element: <EditTask />,
           },
+
+          {
+            path: "update",
+            element: <EditDetails />
+          }
     
         ],
       },

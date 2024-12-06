@@ -43,7 +43,7 @@ const Profile: React.FC = () => {
         {/* Profile Footer */}
         <div className="bg-gray-100 p-4 text-center">
           <button className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-            <Link to="/dashboard/editdetails">Edit Profile</Link>
+            <Link to="/dashboard/update">Edit Profile</Link>
           </button>
         </div>
       </div>
