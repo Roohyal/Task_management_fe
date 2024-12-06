@@ -5,7 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="navbar flex justify-between items-center bg-blue-100 p-4 shadow-md">
+    <div className="navbar flex justify-between items-center bg-blue-100 p-4 shadow-md z-50">
     {/* Welcome Message */}
     <span className="text-xl font-semibold">
       Welcome, <span className="text-blue-500"> Royal</span>

@@ -5,9 +5,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 const TaskOverview: React.FC = () => {
   return (
     <div className="card">
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
     {/* Pending Task Card */}
-    <div className="status--card bg-red-100 text-red-700 rounded-lg shadow-lg p-6">
+    <div className="status--card bg-red-100 text-red-700 rounded-lg shadow-lg p-6 w-80">
       <div className="flex items-center gap-4">
         <div className="icon text-4xl">
           <i className="fas fa-tasks"></i>
@@ -22,7 +22,7 @@ const TaskOverview: React.FC = () => {
     </div>
 
     {/* Completed Task Card */}
-    <div className="status--card bg-green-100 text-green-700 rounded-lg shadow-lg p-6">
+    <div className="status--card bg-green-100 text-green-700 rounded-lg shadow-lg p-6 w-80">
       <div className="flex items-center gap-4">
         <div className="icon text-4xl">
           <i className="fas fa-check-circle"></i>
@@ -37,7 +37,7 @@ const TaskOverview: React.FC = () => {
     </div>
 
     {/* In-progress Task Card */}
-    <div className="status--card bg-blue-100 text-blue-700 rounded-lg shadow-lg p-6">
+    <div className="status--card bg-blue-100 text-blue-700 rounded-lg shadow-lg p-6 w-80">
       <div className="flex items-center gap-4">
         <div className="icon text-4xl">
           <i className="fas fa-spinner"></i>
@@ -52,7 +52,7 @@ const TaskOverview: React.FC = () => {
     </div>
 
     {/* Custom Fourth Card */}
-    <div className="status--card bg-purple-100 text-purple-700 rounded-lg shadow-lg p-6">
+    <div className="status--card bg-purple-100 text-purple-700 rounded-lg shadow-lg p-6 w-80">
       <div className="flex items-center gap-4">
         <div className="icon text-4xl">
           <i className="fas fa-bell"></i>
